@@ -11,3 +11,32 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+
+if [[ "${terminfo[kcuu1]}" != "" ]]; then
+  bindkey "${terminfo[kcuu1]}" up-line-or-search	# start typing + [Up-Arrow] - fuzzy find history forward
+fi
+if [[ "${terminfo[kcud1]}" != "" ]]; then
+  bindkey "${terminfo[kcud1]}" down-line-or-search	# start typing + [Down-Arrow] - fuzzy find history backward
+fi
+bindkey '^[[1;5C' forward-word  # [Ctrl-RightArrow] - move forward one word
+bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
+
+# vim
+alias vi=vim
+
+# git
+unalias gs
+alias gs='git status'
+
+alias gst='git stash save'
+alias gie='git add --edit'
+
+# todo.sh
+alias t='todo.sh'
+
+# fasd
+alias d='fasd -d'
+alias f='fasd -f'
+alias sd='fasd -sid'
+alias sf='fasd -sif'

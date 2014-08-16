@@ -17,8 +17,8 @@ fi
 # Editors
 #
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='vi'
+export VISUAL='vi'
 export PAGER='less'
 
 #
@@ -34,17 +34,59 @@ fi
 #
 
 # Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
+typeset -gU path cdpath fpath manpath mailpath
+
+path=(
+	/usr/local/{bin,sbin}
+	$path
+)
+
+manpath=(
+	/usr/local/share/man
+	$manpath
+)
+
+case "$(uname)" in
+	Darwin)
+		# path and manpath for homebrew
+		path=(
+			/usr/local/opt/{coreutils,gnu-sed}/libexec/gnubin
+			$path
+		)
+		manpath=(
+			/usr/local/opt/{coreutils,gnu-sed}/libexec/gnuman
+			$manpath
+		)
+		;;
+esac
+
+if [ -e "$HOME/Projects" ]; then
+	if [ -e "$HOME/Projects/sitepen" ]; then
+		cdpath=(
+			~/Projects/sitepen
+			$cdpath
+		)
+	fi
+	cdpath=(~/Projects $cdpath)
+	if [ -e "$HOME/Projects/pebble/PebbleSDK-current" ]; then
+		path=(
+			~/Projects/pebble/PebbleSDK-current/bin
+			$path
+		)
+	fi
+fi
 
 # Set the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
+cdpath=(
+	.
+	~
+	$cdpath
+)
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  /usr/local/{bin,sbin}
-  $path
+	~/{bin,.dotfiles/bin}
+	$path
 )
 
 #
