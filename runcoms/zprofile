@@ -89,6 +89,12 @@ path=(
 	$path
 )
 
+fpath=(
+	~/.zprezto/functions
+	$fpath
+)
+autoload -Uz ~/.zprezto/functions/*(:t)
+
 #
 # Less
 #

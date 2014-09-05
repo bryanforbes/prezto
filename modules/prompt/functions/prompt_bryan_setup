@@ -34,7 +34,7 @@ function prompt_bryan_setup {
 	# Set node-info parameters
 	zstyle ':prezto:module:node:info:version' format 'Node [%v]'
 
-	PROMPT='%B%F{green}%n%f%b at %B%F{yellow}%m%f%b in %B%F{blue}${PWD/#$HOME/~}%f%b
+	PROMPT='%B%F{green}%n%f%b at %B%F{yellow}%m%f%b in %B%F{blue}%~%f%b
 ${git_info:+${(e)git_info[prompt]}}%# '
 	# RPROMPT='$node_info[version]'
 }
