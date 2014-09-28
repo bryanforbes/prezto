@@ -9,6 +9,10 @@ if [ -e "${ZDOTDIR:-$HOME}/.zshlocalrc" ]; then
 	source "${ZDOTDIR:-$HOME}/.zshlocalrc"
 fi
 
+# Ubuntu autoloads compinit and runs it. Since prezto does this as well,
+# the following flag skips Ubuntu's compinit and waits for prezto.
+skip_global_compinit=1
+
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"

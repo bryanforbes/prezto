@@ -51,6 +51,14 @@ if [[ -d "$HOME/.jenv" ]]; then
 	eval "$(jenv init -)"
 fi
 
-unalias run-help
-autoload -U run-help
-HELPDIR=/usr/local/share/zsh/help
+# ack
+# On Ubuntu, ack is installed as ack-grep
+if (( ${+commands[ack-grep]} )); then
+	alias ack=ack-grep
+fi
+
+# If run-help is still an alias, unalias it and autoload it (Ubuntu does this for us)
+if (( ${+aliases[run-help]} )); then
+	unalias run-help
+	autoload -Uz run-help
+fi

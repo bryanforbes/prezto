@@ -41,10 +41,8 @@ path=(
 	$path
 )
 
-manpath=(
-	/usr/local/share/man
-	$manpath
-)
+# Initialize manpath with the default system paths
+MANPATH=$(manpath -q)
 
 case "$(uname)" in
 	Darwin)
