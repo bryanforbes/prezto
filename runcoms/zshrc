@@ -7,6 +7,8 @@
 
 NVM_SYMLINK_CURRENT=false
 
+[[ -e ~/.terminfo ]] && export TERMINFO_DIRS=~/.terminfo:/usr/share/terminfo
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -42,6 +44,9 @@ alias d='fasd -d'
 alias f='fasd -f'
 alias sd='fasd -sid'
 alias sf='fasd -sif'
+
+alias pgrep='pgrep -fl'
+alias nr='repl.history'
 
 if [[ -d "$HOME/.jenv" ]]; then
 	path=(
