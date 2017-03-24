@@ -1,4 +1,0 @@
-# vim: set filetype=zsh:
-
-tmux split-window -d -p 25 -c "#{pane_current_path}"
-tmux split-window -d -b -h -t "{bottom}" -c "#{pane_current_path}"
