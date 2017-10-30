@@ -43,7 +43,8 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'node' \
   'osx' \
-  'prompt'
+  'prompt' \
+  'tmux'
 
 #
 # Autosuggestions
@@ -59,6 +60,8 @@ zstyle ':prezto:load' pmodule \
 # Set the entries to ignore in static */etc/hosts* for host completion.
 # zstyle ':prezto:module:completion:*:hosts' etc-host-ignores \
 #   '0.0.0.0' '127.0.0.1'
+
+zstyle ':completion:*:*' ignored-patterns '*ORIG_HEAD'
 
 #
 # Editor
@@ -214,13 +217,13 @@ zstyle ':prezto:module:prompt' theme 'bryan'
 # zstyle ':prezto:module:tmux:auto-start' local 'yes'
 
 # Auto start a session when Zsh is launched in a SSH connection.
-# zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
 # Integrate with iTerm2.
 # zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 
 # Set the default session name:
-# zstyle ':prezto:module:tmux:session' name 'YOUR DEFAULT SESSION NAME'
+zstyle ':prezto:module:tmux:session' name 'default'
 
 #
 # Utility
