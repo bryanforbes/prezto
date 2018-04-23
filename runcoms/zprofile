@@ -41,6 +41,13 @@ path=(
 	$path
 )
 
+if [[ -d "$HOME/.cargo/bin" ]]; then
+	path=(
+		~/.cargo/bin
+		$path
+	)
+fi
+
 # Initialize manpath with the default system paths
 MANPATH=$(manpath -q)
 
