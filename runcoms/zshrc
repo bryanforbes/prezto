@@ -26,6 +26,10 @@ fi
 bindkey '^[[1;5C' forward-word  # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
 
+if [[ -n "$key_info" ]]; then
+	bindkey -M emacs "$key_info[Control]F" emacs-forward-word
+fi
+
 # git
 unalias gs
 alias gs='git status'

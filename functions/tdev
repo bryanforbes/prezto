@@ -12,9 +12,10 @@ if [[ -n "$1" ]]; then
 fi
 
 if (( $NEW_WINDOW )); then
-	tmux new-window -c "$CURRENT_PATH"
+  tmux new-window -c "$CURRENT_PATH" -n "$(basename $CURRENT_PATH)"
 elif [[ "$CURRENT_PATH" != "#{pane_current_path}" ]]; then
 	cd "$CURRENT_PATH"
+  tmux rename-window "$(basename $CURRENT_PATH)"
 fi
 
 tmux split-window -d -p 25 -c "$CURRENT_PATH"
