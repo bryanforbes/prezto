@@ -43,8 +43,8 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'node' \
   'osx' \
-  'history-substring-search' \
   'syntax-highlighting' \
+  'history-substring-search' \
   'autosuggestions' \
   'prompt' \
   'tmux' \
@@ -55,7 +55,7 @@ zstyle ':prezto:load' pmodule \
 #
 
 # Set the query found color.
-# zstyle ':prezto:module:autosuggestions:color' found ''
+zstyle ':prezto:module:autosuggestions:color' found 'fg=15'
 
 #
 # Completions
