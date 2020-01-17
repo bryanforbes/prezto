@@ -1,22 +1,32 @@
-local NEW_WINDOW=0
-local CURRENT_PATH="#{pane_current_path}"
+local new_window directories
 
-if [[ "$1" == "-n" ]]; then
-	NEW_WINDOW=1
-	shift
+zparseopts -E -D n=new_window
+
+# copy $@ to $directories
+directories=("${@[@]}")
+
+if [[ -n "$new_window" ]]; then
+	new_window=1
+else
+	new_window=0
 fi
 
-if [[ -n "$1" ]]; then
-	CURRENT_PATH="$1"
-	shift
+if [[ -z "$directories" ]]; then
+	directories=($PWD)
 fi
 
-if (( $NEW_WINDOW )); then
-  tmux new-window -c "$CURRENT_PATH" -n "$(basename $CURRENT_PATH)"
-elif [[ "$CURRENT_PATH" != "#{pane_current_path}" ]]; then
-	cd "$CURRENT_PATH"
-  tmux rename-window "$(basename $CURRENT_PATH)"
-fi
+for directory in $directories; do
+	if (( $new_window )); then
+		tmux new-window -c "$directory" -n "$(basename $directory)"
+	else
+		if [[ "$directory" != "$PWD" ]]; then
+			cd "$directory"
+		fi
+		tmux rename-window "$(basename $directory)"
+	fi
 
-tmux split-window -d -p 25 -c "$CURRENT_PATH"
-tmux split-window -d -b -h -t "{bottom}" -c "$CURRENT_PATH"
+	tmux split-window -d -p 25 -c "$directory"
+	tmux split-window -d -b -h -t "{bottom}" -c "$directory"
+
+	new_window=1
+done
