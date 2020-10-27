@@ -59,12 +59,12 @@ if [[ -d "$HOME/.jenv" ]]; then
 	eval "$(jenv init -)"
 fi
 
-if [[ -d "/usr/local/opt/python/libexec/bin" ]]; then
-  path=(
-    /usr/local/opt/python/libexec/bin
-    $path
-  )
-fi
+# if [[ -d "/usr/local/opt/python/libexec/bin" ]]; then
+#   path=(
+#     /usr/local/opt/python/libexec/bin
+#     $path
+#   )
+# fi
 
 if [[ -d "$HOME/.poetry" ]]; then
   path=(
@@ -107,3 +107,25 @@ fi
 # 	add-zsh-hook chpwd load-nvmrc
 # 	load-nvmrc
 # fi
+
+if (( ${+commands[direnv]} )); then
+	export DIRENV_LOG_FORMAT=
+
+	eval "$(direnv hook $SHELL)"
+
+	# Wrap tmux to avoid environment loading issues
+	# See https://github.com/direnv/direnv/wiki/Tmux
+	tmux() { direnv exec / tmux $*; }
+fi
+
+if (( ${+commands[asdf]} )); then
+	path=(
+	  ~/.asdf/shims
+	  $path
+	)
+
+	export ASDF_DIR=/usr/local/opt/asdf
+
+	# alias direnv so we don't have to type asdf exec all the time
+	# direnv() { asdf exec direnv $*; }
+fi
